@@ -1,0 +1,6 @@
+*.pyc
+__pycache__
+valid_model.py
+*.csv
+/tools/
+.DS_Store

@@ -1,0 +1,44 @@
+# NAME: ""
+MODE: "train_val"
+INPUT_SIZE: (224, 224)
+RESUME: True # False # Auto resume
+INIT_MODEL: ""
+NUM_CLASSES: 209
+CROSS_VALIDATION: False
+
+DATASET:
+  DATA_DIR: "/data/iwildcam-2020/"
+  # SAVE_DIR: "" # TODO: assign in main.py
+  SUB_DIR: "animal_crops_224x224"
+  TRAIN_JSON: "train_224.json"
+  VAL_JSON: "val_224.json"
+  TEST_JSON: "test_by_seqv2.json"
+
+NET:
+  TYPE: "NTS" # "NTS"
+  BACKBONE: "resnet"
+  PRETRAINED: True
+  PROPOSAL_NUM: 6
+  CAT_NUM: 4
+
+LOSS:
+  LOSS_TYPE: "CE"
+  LOSS_WEIGHT: False
+
+TRAIN:
+  BATCH_SIZE: &BS 128
+  EVAL_BATCH_SIZE: *BS
+  EPOCHS: 36
+  NUM_WORKER: 16
+  WEIGHT_SAMPLER: False
+
+  LR: 5e-3
+  LR_SCHEDULE: "Step"
+  LR_DECAY_EPOCHS: [26, 32, 34]
+  WEIGHT_DECAY: 1e-4
+  OPTIM: "Adam"
+
+
+TEST:
+  BATCH_SIZE: 32
+  MODE: "infer_by_seqv2"
